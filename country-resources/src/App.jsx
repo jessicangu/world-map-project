@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
 import Navbar from "./components/Navbar";
 import Map from "./components/Map";
@@ -7,6 +7,9 @@ import AdminResourceForm from "./components/AdminResourceForm";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin";
 import AdminContact from "./pages/AdminContact";
+import ViewResources from "./pages/ViewResources";
+import EditResource from "./pages/EditResource";
+import Home from "./pages/Home";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,6 +19,7 @@ function App() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(false);
   const mapRef = useRef();
+  const location = useLocation();
 
   const handleCountryClick = (countryName) => {
     setSelectedCountry(countryName);
@@ -69,39 +73,47 @@ function App() {
     localStorage.removeItem("token");
   };
 
+  const isAdminPath = location.pathname.startsWith("/admin") && isLoggedIn;
+
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Map onCountryClick={handleCountryClick} ref={mapRef} />
-              <SidePanel
-                data={countryData}
-                resources={resources}
-                loading={loading}
-                onClose={closePanel}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            isLoggedIn ? <AdminDashboard user={user} /> : <Navigate to="/admin/login" />
-          }
-        />
-        <Route
-          path="/admin/add-resource"
-          element={
-            isLoggedIn ? <AdminResourceForm user={user} /> : <Navigate to="/admin/login" />
-          }
-        />
-        <Route path="/admin/contact" element={<AdminContact />} />
-        <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
-      </Routes>
+      {!isAdminPath && <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />}
+
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/map"
+        element={
+          <>
+            <Map onCountryClick={handleCountryClick} ref={mapRef} />
+            <SidePanel
+              data={countryData}
+              resources={resources}
+              loading={loading}
+              onClose={closePanel}
+            />
+          </>
+        }
+      />
+      <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+      <Route
+        path="/admin"
+        element={
+          isLoggedIn ? (
+            <AdminDashboard user={user} onLogout={handleLogout} />
+          ) : (
+            <Navigate to="/admin/login" />
+          )
+        }
+      >
+        <Route index element={<div style={{ padding: "2rem" }}>Welcome to the Admin Dashboard</div>} />
+        <Route path="add-resource" element={<AdminResourceForm user={user} />} />
+        <Route path="view-resource" element={<ViewResources />} />
+        <Route path="edit-resource/:id" element={<EditResource />} />
+        <Route path="contact" element={<AdminContact />} />
+      </Route>
+    </Routes>
+
     </>
   );
 }

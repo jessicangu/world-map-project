@@ -1,0 +1,44 @@
+
+.edit-resource-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #1c1c2a;
+  padding: 2rem;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.edit-resource-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.edit-resource-form input,
+.edit-resource-form textarea,
+.edit-resource-form select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.edit-resource-form button {
+  padding: 0.75rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-message {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #4aff87;
+}

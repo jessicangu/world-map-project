@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminLogin({ onLogin }) {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +28,7 @@ export default function AdminLogin({ onLogin }) {
 
       localStorage.setItem("token", data.token);
       onLogin(data.user);
+      navigate("/admin");
     } catch (err) {
       setError(err.message);
     }
@@ -33,7 +36,7 @@ export default function AdminLogin({ onLogin }) {
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "2rem auto" }}>
-      <h2>admin login</h2>
+      <h2>Admin Login</h2>
       <input
         name="username"
         value={form.username}
@@ -49,7 +52,7 @@ export default function AdminLogin({ onLogin }) {
         placeholder="Password"
         required
       />
-      <button type="submit">sign in</button>
+      <button type="submit">Sign In</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );

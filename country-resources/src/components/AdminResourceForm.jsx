@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import "../styles/adminResourceForm.css";
 
-// countries
 const countries = [
-  "Turkey", "Syria", "Ukraine", "Sudan", "Afghanistan", "Ethiopia", "Yemen", "Lebanon", "Iran"
+  "Turkey", "Syria", "Ukraine", "Sudan", "Afghanistan",
+  "Ethiopia", "Yemen", "Lebanon", "Iran"
 ];
 
 const categories = ["legal", "food", "education", "shelter", "medical", "safety"];
@@ -15,7 +16,7 @@ export default function AdminResourceForm() {
     description: "",
     website: "",
     address: "",
-    verified: false
+    verified: false,
   });
 
   const [message, setMessage] = useState("");
@@ -37,7 +38,15 @@ export default function AdminResourceForm() {
       const data = await res.json();
       if (res.ok) {
         setMessage("resource added!");
-        setForm({ country: "", category: "legal", name: "", description: "", website: "", address: "", verified: false });
+        setForm({
+          country: "",
+          category: "legal",
+          name: "",
+          description: "",
+          website: "",
+          address: "",
+          verified: false,
+        });
       } else {
         setMessage(`error: ${data.error}`);
       }
@@ -46,29 +55,83 @@ export default function AdminResourceForm() {
     }
   };
 
-  return ( // form for adding resources
-    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "500px" }}>
-      <select name="country" value={form.country} onChange={handleChange} required>
-        <option value="">select country</option>
-        {countries.map((c) => <option key={c} value={c}>{c}</option>)}
-      </select>
+  return (
+    <div className="resource-form-container">
+      <h2>add new resource</h2>
+      <form className="resource-form" onSubmit={handleSubmit}>
+        <label>
+          country
+          <select name="country" value={form.country} onChange={handleChange} required>
+            <option value="">select a country</option>
+            {countries.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </label>
 
-      <select name="category" value={form.category} onChange={handleChange}>
-        {categories.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
-      </select>
+        <label>
+          category
+          <select name="category" value={form.category} onChange={handleChange}>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </label>
 
-      <input name="name" value={form.name} onChange={handleChange} placeholder="Resource Name" required />
-      <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" />
-      <input name="website" value={form.website} onChange={handleChange} placeholder="Website URL" />
-      <input name="address" value={form.address} onChange={handleChange} placeholder="Address" />
+        <label>
+          resource name
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="resource name"
+            required
+          />
+        </label>
 
-      <label>
-        <input type="checkbox" name="verified" checked={form.verified} onChange={handleChange} />
-        verified
-      </label>
+        <label>
+          description
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            placeholder="short description"
+          />
+        </label>
 
-      <button type="submit">add resource</button>
-      {message && <p>{message}</p>}
-    </form>
+        <label>
+          website
+          <input
+            name="website"
+            value={form.website}
+            onChange={handleChange}
+            placeholder="https://example.org"
+          />
+        </label>
+
+        <label>
+          address
+          <input
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+            placeholder="street, city, zip"
+          />
+        </label>
+
+        <label className="checkbox-row">
+          <input
+            type="checkbox"
+            name="verified"
+            checked={form.verified}
+            onChange={handleChange}
+          />
+          verified?
+        </label>
+
+        <button type="submit">add Resource</button>
+        {message && <p className="form-message">{message}</p>}
+      </form>
+    </div>
   );
 }

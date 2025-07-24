@@ -10,7 +10,7 @@ export const getAllResources = async (req, res) => {
     const resources = await Resource.find(filter).sort({ verified: -1, createdAt: -1 });
     res.json(resources);
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "server error" });
   }
 };
 
@@ -18,10 +18,10 @@ export const getResourceById = async (req, res) => {
   try {
     const resource = await Resource.findById(req.params.id);
     if (!resource || resource.isDeleted)
-      return res.status(404).json({ error: "Not found" });
+      return res.status(404).json({ error: "not found" });
     res.json(resource);
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "server error" });
   }
 };
 
@@ -54,8 +54,8 @@ export const updateResource = async (req, res) => {
 export const softDeleteResource = async (req, res) => {
   try {
     await Resource.findByIdAndUpdate(req.params.id, { isDeleted: true });
-    res.json({ message: "Resource deleted (soft)" });
+    res.json({ message: "resource deleted (soft)" });
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "server error" });
   }
 };

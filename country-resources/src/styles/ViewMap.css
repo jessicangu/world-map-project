@@ -1,0 +1,14 @@
+.world-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: max-content;
+  min-height: 30em;
+  background-color: #153112;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 100px;
+}

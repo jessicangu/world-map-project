@@ -1,0 +1,75 @@
+
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #18161c;
+  color: #fff;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #1f1b24;
+  padding: 2rem 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.admin-sidebar .user-dropdown {
+  margin-bottom: 2rem;
+}
+
+.user-btn {
+  background: none;
+  border: none;
+  color: #dcbfff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.dropdown-menu li button {
+  background: none;
+  border: none;
+  color: #ffb3b3;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+nav ul li {
+  margin-bottom: 1.2rem;
+}
+
+nav ul li a {
+  color: #dcbfff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ffffff;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #232029;
+  overflow-y: auto;
+}

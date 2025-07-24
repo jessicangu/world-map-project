@@ -1,16 +1,52 @@
-export default function Navbar({ isLoggedIn, onLogout }) {
+import { Link } from "react-router-dom";
+
+export default function Navbar() {
   return (
-    <nav style={{ background: "#1d1a20", padding: "1rem", color: "#fff" }}>
-      <a href="/" style={{ marginRight: "1rem", color: "#dcbfff" }}>Home</a>
-      <a href="/admin/contact" style={{ marginRight: "1rem", color: "#dcbfff" }}>Contact</a>
-      {isLoggedIn ? (
-        <>
-          <a href="/admin" style={{ marginRight: "1rem", color: "#dcbfff" }}>Dashboard</a>
-          <button onClick={onLogout} style={{ backgroundColor: "#443d4b", color: "#fff" }}>Logout</button>
-        </>
-      ) : (
-        <a href="/admin/login" style={{ color: "#dcbfff" }}>Admin Login</a>
-      )}
+    <nav style={styles.nav}>
+      <div style={styles.logo}>country resources</div>
+      <div style={styles.links}>
+        <Link to="/map" style={styles.link}>map</Link>
+        <Link to="/about" style={styles.link}>about</Link>
+        <Link to="/contact" style={styles.link}>contact</Link>
+        <Link to="/admin/login" style={{ ...styles.link, ...styles.loginBtn }}>login</Link>
+      </div>
     </nav>
   );
 }
+
+const styles = {
+  nav: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "1.5rem 2.5rem",
+    backgroundColor: "#153112",
+    color: "white",
+    position: "sticky",
+    top: 0,
+    zIndex: 1000,
+  },
+  logo: {
+    fontWeight: "bold",
+    fontSize: "1.2rem",
+    color: "white",
+    textDecoration: "none",
+  },
+  links: {
+    display: "flex",
+    gap: "1.5rem",
+    alignItems: "center",
+  },
+  link: {
+    textDecoration: "none",
+    color: "white",
+    fontSize: "0.95rem",
+    transition: "opacity 0.2s",
+  },
+  loginBtn: {
+    backgroundColor: "#5d8066",
+    padding: "0.5rem 1.1rem",
+    borderRadius: "999px",
+    fontWeight: "bold",
+  },
+};

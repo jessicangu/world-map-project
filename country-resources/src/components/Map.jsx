@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import worldMap from "../assets/world.svg";
+import "../styles/ViewMap.css";
 
 const Map = forwardRef(({ onCountryClick }, ref) => {
   const objectRef = useRef(null);
@@ -9,7 +10,7 @@ const Map = forwardRef(({ onCountryClick }, ref) => {
   useImperativeHandle(ref, () => ({
     resetHighlight: () => {
       countriesRef.current.forEach((el) => {
-        const original = el.getAttribute("data-original-fill") || "#443d4b";
+        const original = el.getAttribute("data-original-fill") || "#153112";
         el.style.fill = original;
       });
     }
@@ -59,7 +60,7 @@ const Map = forwardRef(({ onCountryClick }, ref) => {
             : [country];
 
           elements.forEach((el) => {
-            const original = el.getAttribute("data-original-fill") || "#443d4b";
+            const original = el.getAttribute("data-original-fill") || "#153112";
             el.style.fill = original;
           });
         });

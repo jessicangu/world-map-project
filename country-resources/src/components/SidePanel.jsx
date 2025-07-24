@@ -1,4 +1,3 @@
-// src/components/SidePanel.jsx
 import React from "react";
 
 function SidePanel({ data, onClose, loading, resources }) {
@@ -29,7 +28,6 @@ function SidePanel({ data, onClose, loading, resources }) {
             </li>
           </ul>
 
-          {/* Humanitarian Resources Section */}
           {!loading && resources && (
             <div className="resources-section">
               <h3>Humanitarian Resources</h3>

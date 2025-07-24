@@ -1,14 +1,41 @@
 import mongoose from "mongoose";
 
-const resourceSchema = new mongoose.Schema({
-  country: { type: String, required: true },
-  category: { type: String, required: true }, // e.g. 'legal', 'shelter', 'food'
-  name: { type: String, required: true },
-  url: { type: String, required: true },
-  description: { type: String },
-  language: [String], // e.g. ['en', 'ar']
-  verified: { type: Boolean, default: false }
-}, { timestamps: true });
+const ResourceSchema = new mongoose.Schema({
+  country: {
+    type: String,
+    required: true,
+    index: true
+  },
+  category: {
+    type: String,
+    enum: ['legal', 'food', 'education', 'shelter', 'medical', 'safety'],
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  description: String,
+  website: String,
+  verified: {
+    type: Boolean,
+    default: false
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: Date,
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
+});
 
-const Resource = mongoose.model("Resource", resourceSchema);
+const Resource = mongoose.model("Resource", ResourceSchema);
 export default Resource;

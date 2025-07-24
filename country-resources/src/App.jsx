@@ -1,10 +1,16 @@
-// src/App.jsx
-import React, { useState, useRef } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useState, useRef } from "react";
+import Navbar from "./components/Navbar";
 import Map from "./components/Map";
 import SidePanel from "./components/SidePanel";
-import "./index.css";
+import AdminResourceForm from "./components/AdminResourceForm";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
+import AdminContact from "./pages/AdminContact";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryData, setCountryData] = useState(null);
   const [resources, setResources] = useState([]);
@@ -15,21 +21,17 @@ function App() {
     setSelectedCountry(countryName);
     setLoading(true);
     setCountryData(null);
-    setResources([]); // Reset resources
+    setResources([]);
 
-    // Fetch general country data from Rest Countries API
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch");
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         const d = data[0];
         setCountryData({
           name: d.name.common,
           flag: d.flags.png,
           capital: d.capital?.[0] || "N/A",
-          area: `${d.area.toLocaleString("de-DE")} km<sup>2</sup>`,
+          area: `${d.area.toLocaleString("de-DE")} km²`,
           currency: Object.values(d.currencies || {}).map((c) => c.name),
           languages: Object.values(d.languages || {}),
         });
@@ -39,8 +41,7 @@ function App() {
         setCountryData(null);
       });
 
-    // Fetch humanitarian resources from your Express backend
-    fetch(`http://localhost:5000/api/resources?country=${encodeURIComponent(countryName)}`)
+    fetch(`/api/resources?country=${encodeURIComponent(countryName)}`)
       .then((res) => res.json())
       .then((data) => setResources(data))
       .catch((err) => {
@@ -54,18 +55,53 @@ function App() {
     setCountryData(null);
     setResources([]);
     setSelectedCountry(null);
-    mapRef.current?.resetHighlight(); // Reset country hover highlight
+    mapRef.current?.resetHighlight();
+  };
+
+  const handleLogin = (userData) => {
+    setIsLoggedIn(true);
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser(null);
+    localStorage.removeItem("token");
   };
 
   return (
     <>
-      <Map onCountryClick={handleCountryClick} ref={mapRef} />
-      <SidePanel
-        data={countryData}
-        resources={resources}
-        loading={loading}
-        onClose={closePanel}
-      />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Map onCountryClick={handleCountryClick} ref={mapRef} />
+              <SidePanel
+                data={countryData}
+                resources={resources}
+                loading={loading}
+                onClose={closePanel}
+              />
+            </>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            isLoggedIn ? <AdminDashboard user={user} /> : <Navigate to="/admin/login" />
+          }
+        />
+        <Route
+          path="/admin/add-resource"
+          element={
+            isLoggedIn ? <AdminResourceForm user={user} /> : <Navigate to="/admin/login" />
+          }
+        />
+        <Route path="/admin/contact" element={<AdminContact />} />
+        <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+      </Routes>
     </>
   );
 }

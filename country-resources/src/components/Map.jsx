@@ -1,4 +1,3 @@
-// src/components/Map.jsx
 import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import worldMap from "../assets/world.svg";
 

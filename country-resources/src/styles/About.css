@@ -1,0 +1,33 @@
+.about {
+  background-color: #ECE7D7;
+  color: #333D29;
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.about-container {
+  max-width: 800px;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.about-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #333D29;
+}
+
+.about-container p {
+  margin-bottom: 1.5rem;
+}
+
+.signature {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 2rem;
+  color: #333D29;
+}

@@ -1,8 +1,10 @@
 .home {
-  background-color: #153112;
-  color: white;
+  background-color: #ECE7D7; 
+  color: #333D29;
   min-height: 100vh;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding: 0 1rem;
 }
 
 .navbar {
@@ -10,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2.5rem;
-  background-color: #153112;
+  background-color: #333D29;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -18,66 +20,140 @@
 
 .logo {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  color: #ECE7D7;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.7rem;
   align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: white;
-  font-size: 0.95rem;
+  color: #ECE7D7;
+  font-size: 1.05rem;
+  position: relative;
   transition: opacity 0.2s;
 }
 
-.nav-links a:hover {
-  opacity: 0.7;
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #D4AF7F;
+  transition: width 0.3s;
 }
 
-.login-btn {
-  background-color: #5d8066;
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  font-weight: bold;
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .hero {
-  text-align: center;
-  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1rem 4rem;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 4.2rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #3f3f3f;
+  margin-bottom: 2rem;
 }
 
 .hero p {
-  font-size: 1.1rem;
-  margin-bottom: 2.5rem;
+  font-size: 1.25rem;
+  max-width: 650px;
+  margin: 0 auto 3rem;
+  color: #333D29;
+  line-height: 1.6;
 }
 
 .map-img {
   width: 90%;
-  max-width: 800px;
-  margin-bottom: 2rem;
+  max-width: 950px;
+  margin: 0 auto 2.5rem;
+  display: block;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 .cta-button {
   display: inline-block;
-  background-color: #5d8066;
-  color: white;
-  padding: 0.8rem 1.6rem;
+  background-color: #A68A64;
+  color: #ECE7D7;
+  padding: 0.9rem 1.7rem;
   text-decoration: none;
   border-radius: 8px;
-  font-weight: 500;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s;
+  border: 1px solid #A68A64;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
 .cta-button:hover {
-  background-color: #769b7c;
+  background-color: rgb(105, 88, 64);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.fade-delay-1 {
+  animation-delay: 0.2s;
+}
+.fade-delay-2 {
+  animation-delay: 0.4s;
+}
+.fade-delay-3 {
+  animation-delay: 0.6s;
+}
+.fade-delay-4 {
+  animation-delay: 0.8s;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .map-img {
+    width: 100%;
+  }
 }

@@ -20,7 +20,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "1.5rem 2.5rem",
-    backgroundColor: "#153112",
+    backgroundColor: "#333D29",
     color: "white",
     position: "sticky",
     top: 0,
@@ -29,7 +29,7 @@ const styles = {
   logo: {
     fontWeight: "bold",
     fontSize: "1.2rem",
-    color: "white",
+    color: "#EFE7D0",
     textDecoration: "none",
   },
   links: {
@@ -39,12 +39,12 @@ const styles = {
   },
   link: {
     textDecoration: "none",
-    color: "white",
+    color: "#EFE7D0",
     fontSize: "0.95rem",
     transition: "opacity 0.2s",
   },
   loginBtn: {
-    backgroundColor: "#5d8066",
+    backgroundColor: "#A68A64",
     padding: "0.5rem 1.1rem",
     borderRadius: "999px",
     fontWeight: "bold",

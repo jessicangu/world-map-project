@@ -94,7 +94,7 @@ export default function EditResource() {
           name="name"
           value={form.name || ""}
           onChange={handleChange}
-          placeholder="Resource Name"
+          placeholder="resource name"
           required
         />
       </label>
@@ -105,7 +105,7 @@ export default function EditResource() {
           name="description"
           value={form.description || ""}
           onChange={handleChange}
-          placeholder="Description"
+          placeholder="description"
         />
       </label>
 
@@ -115,7 +115,7 @@ export default function EditResource() {
           name="website"
           value={form.website || ""}
           onChange={handleChange}
-          placeholder="Website URL"
+          placeholder="website URL"
         />
       </label>
 
@@ -125,7 +125,7 @@ export default function EditResource() {
           name="address"
           value={form.address || ""}
           onChange={handleChange}
-          placeholder="Address"
+          placeholder="address"
         />
       </label>
 

@@ -10,6 +10,7 @@ import AdminContact from "./pages/AdminContact";
 import ViewResources from "./pages/ViewResources";
 import EditResource from "./pages/EditResource";
 import Home from "./pages/Home";
+import About from "./pages/About";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -95,6 +96,8 @@ function App() {
           </>
         }
       />
+      <Route path="/about" element={<About />} />
+
       <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
       <Route
         path="/admin"
@@ -106,12 +109,13 @@ function App() {
           )
         }
       >
-        <Route index element={<div style={{ padding: "2rem" }}>Welcome to the Admin Dashboard</div>} />
+        <Route index element={<div style={{ padding: "2rem" }}>welcome to the admin dashboard</div>} />
         <Route path="add-resource" element={<AdminResourceForm user={user} />} />
         <Route path="view-resource" element={<ViewResources />} />
         <Route path="edit-resource/:id" element={<EditResource />} />
         <Route path="contact" element={<AdminContact />} />
       </Route>
+
     </Routes>
 
     </>

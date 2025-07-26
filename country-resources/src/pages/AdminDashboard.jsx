@@ -21,16 +21,16 @@ export default function AdminDashboard({ user, onLogout }) {
           </button>
           {menuOpen && (
             <ul className="dropdown-menu">
-              <li><button onClick={handleLogout}>Logout</button></li>
+              <li><button onClick={handleLogout}>logout</button></li>
             </ul>
           )}
         </div>
         <nav>
           <ul>
-            <li><Link to="/admin">Dashboard</Link></li>
-            <li><Link to="/admin/add-resource">Add Resource</Link></li>
-            <li><Link to="/admin/view-resource">View Resource</Link></li>
-            <li><Link to="/admin/contact">Contact</Link></li>
+            <li><Link to="/admin">dashboard</Link></li>
+            <li><Link to="/admin/add-resource">add resource</Link></li>
+            <li><Link to="/admin/view-resource">view resource</Link></li>
+            <li><Link to="/admin/contact">contact</Link></li>
           </ul>
         </nav>
       </aside>
